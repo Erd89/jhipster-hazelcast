@@ -1,0 +1,16 @@
+version: '2'
+services:
+  jhipster_hazelcast-app:
+    image: jhipster_hazelcast
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://jhipster_hazelcast-mssql:1433;database=Jhipster_hazelcast
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+    ports:
+      - 8080:8080
+  jhipster_hazelcast-mssql:
+    extends:
+      file: mssql.yml
+      service: jhipster_hazelcast-mssql
